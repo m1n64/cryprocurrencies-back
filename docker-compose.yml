@@ -9,7 +9,7 @@ services:
             args:
                 WWWGROUP: '${WWWGROUP}'
         image: sail-8.2/app
-        container_name: app-l11
+        container_name: app-crypto-back
         extra_hosts:
             - 'host.docker.internal:host-gateway'
         ports:
@@ -19,8 +19,6 @@ services:
         environment:
             WWWUSER: '${WWWUSER}'
             LARAVEL_SAIL: 1
-            XDEBUG_MODE: 'none'
-            XDEBUG_CONFIG: '${SAIL_XDEBUG_CONFIG:-client_host=host.docker.internal}'
             IGNITION_LOCAL_SITES_PATH: '${PWD}'
             DB_CONNECTION: 'pgsql'
             DB_HOST: db
@@ -35,11 +33,11 @@ services:
             - redis
             - mailhog
         networks:
-            - laravel_11_docker_template_network
+            - cryptocurrencies-backend-network
 
     db:
         image: postgres:15
-        container_name: db-l11
+        container_name: db-crypto-back
         restart: unless-stopped
         environment:
             POSTGRES_DB: ${DB_DATABASE}
@@ -50,38 +48,38 @@ services:
         ports:
             - "5432:5432"
         networks:
-            - laravel_11_docker_template_network
+            - cryptocurrencies-backend-network
 
     redis:
         image: redis:alpine
-        container_name: redis-l11
+        container_name: redis-crypto-back
         volumes:
             - ./redis:/data
         ports:
             - "6379:6379"
         networks:
-            - laravel_11_docker_template_network
+            - cryptocurrencies-backend-network
 
 
     mailhog:
         image: 'mailhog/mailhog:latest'
-        container_name: mailhog-l11
+        container_name: mailhog-crypto-back
         ports:
             - '${FORWARD_MAILHOG_PORT:-1025}:1025'
             - '${FORWARD_MAILHOG_DASHBOARD_PORT:-8025}:8025'
         networks:
-            - laravel_11_docker_template_network
+            - cryptocurrencies-backend-network
 
     adminer:
         image: adminer
-        container_name: adminer-l11
+        container_name: adminer-crypto-back
         restart: always
         networks:
-            - laravel_11_docker_template_network
+            - cryptocurrencies-backend-network
 
 volumes:
     db-data:
 
 networks:
-    laravel_11_docker_template_network:
+    cryptocurrencies-backend-network:
         driver: bridge
