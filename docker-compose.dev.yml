@@ -9,7 +9,7 @@ services:
       args:
         WWWGROUP: '${WWWGROUP}'
     image: sail-8.2/app
-    container_name: app-l11
+    container_name: app-crypto-back
     extra_hosts:
       - 'host.docker.internal:host-gateway'
     ports:
@@ -19,8 +19,6 @@ services:
     environment:
       WWWUSER: '${WWWUSER}'
       LARAVEL_SAIL: 1
-      XDEBUG_MODE: '${SAIL_XDEBUG_MODE:-debug}'
-      XDEBUG_CONFIG: '${SAIL_XDEBUG_CONFIG:-client_host=host.docker.internal}'
       IGNITION_LOCAL_SITES_PATH: '${PWD}'
       DB_CONNECTION: 'pgsql'
       DB_HOST: db
@@ -29,13 +27,13 @@ services:
       DB_PASSWORD: ${DB_PASSWORD}
       REDIS_HOST: redis
     networks:
-      - laravel_11_docker_template_network
+      - cryptocurrencies-backend-network
 
   adminer:
     image: adminer
-    container_name: adminer-l11
+    container_name: adminer-crypto-back
     restart: unless-stopped
     ports:
       - "1337:8080"
     networks:
-      - laravel_11_docker_template_network
+      - cryptocurrencies-backend-network

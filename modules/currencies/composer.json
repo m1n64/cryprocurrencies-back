@@ -1,0 +1,24 @@
+{
+	"name": "modules/currencies",
+	"description": "",
+	"type": "library",
+	"version": "1.0",
+	"license": "proprietary",
+	"require": {},
+	"autoload": {
+		"psr-4": {
+			"Modules\\Currencies\\": "src/",
+			"Modules\\Currencies\\Tests\\": "tests/",
+			"Modules\\Currencies\\Database\\Factories\\": "database/factories/",
+			"Modules\\Currencies\\Database\\Seeders\\": "database/seeders/"
+		}
+	},
+	"minimum-stability": "stable",
+	"extra": {
+		"laravel": {
+			"providers": [
+				"Modules\\Currencies\\Providers\\CurrenciesServiceProvider"
+			]
+		}
+	}
+}
