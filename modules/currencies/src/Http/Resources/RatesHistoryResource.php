@@ -15,6 +15,7 @@ class RatesHistoryResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            'id' => $this->id,
             'currency_id' => $this->currency_id,
             'check_time' => Carbon::createFromTimestamp($this->check_time)->toDateTimeString(),
             'price' => (float) $this->price_usd,
