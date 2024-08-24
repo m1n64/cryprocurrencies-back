@@ -15,13 +15,32 @@ class CurrencyController extends Controller
 {
     /**
      * @param Request $request
+     *
      * @return AnonymousResourceCollection
      */
     public function all(Request $request)
     {
-        return CurrencyWithRateResource::collection(Currency::all());
+        $page = $request->get('page', 1);
+
+        $q = $request->get('q', null);
+
+        $currencies = Currency::query();
+        if ($q) {
+            $query = \Str::ucfirst($q);
+
+            $currencies = $currencies->where('name', 'ILIKE', "%{$query}%");
+        }
+
+        $currencies = $currencies->paginate(15);
+
+        return CurrencyWithRateResource::collection($currencies);
     }
 
+    /**
+     * @param Request $request
+     * @param Currency $currency
+     * @return AnonymousResourceCollection
+     */
     public function ratesHistory(Request $request, Currency $currency)
     {
         return RatesHistoryResource::collection($currency->rates()->where('check_time', '>=', now()->subHours(24))->get());
