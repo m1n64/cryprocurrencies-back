@@ -43,7 +43,7 @@ class CurrencyController extends Controller
      */
     public function ratesHistory(Request $request, Currency $currency)
     {
-        return RatesHistoryResource::collection($currency->rates()->where('check_time', '>=', now()->subHours(24))->get());
+        return RatesHistoryResource::collection($currency->rates()->where('check_time', '>=', now()->subHours(1))->get());
     }
 
     /**
