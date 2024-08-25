@@ -21,15 +21,13 @@ class ConverterController extends Controller
 
         $amount = $request->amount;
 
-        if ($request->is_crypto) {
-            $amountInUSD = $cryptoCurrency->rates()->latest()->first()->price_usd * $amount;
+        $cryptoRateInUSD = $cryptoCurrency->rates()->latest()->first()->price_usd;
 
-            $result = $amountInUSD / $fiatCurrency->fiatRates()->latest()->first()->rate_usd;
-        } else {
-            $amountInUSD = $amount / $fiatCurrency->fiatRates()->latest()->first()->rate_usd;
+        $fiatRateInUSD = $fiatCurrency->fiatRates()->latest()->first()->rate_usd;
 
-            $result = $amountInUSD / $cryptoCurrency->rates()->latest()->first()->price_usd;
-        }
+        $result = ($request->is_crypto)
+            ? ($cryptoRateInUSD * $amount) / $fiatRateInUSD  // Крипта в фиат
+            : $amount * ($fiatRateInUSD / $cryptoRateInUSD);  // Фиат в крипту
 
         return response()
             ->json([
