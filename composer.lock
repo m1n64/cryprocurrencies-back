@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "081f44466ad01fc816aa16850d46e7fa",
+    "content-hash": "b7bbfab625f3db8bf6ee2b4b326e301b",
     "packages": [
         {
             "name": "brick/math",
@@ -3351,6 +3351,38 @@
                     "Modules\\Coincap\\Tests\\": "tests/",
                     "Modules\\Coincap\\Database\\Factories\\": "database/factories/",
                     "Modules\\Coincap\\Database\\Seeders\\": "database/seeders/"
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
+            "name": "modules/converter",
+            "version": "1.0",
+            "dist": {
+                "type": "path",
+                "url": "modules/converter",
+                "reference": "f970b9b16d0c206d9b2668064638dcd8e91020ff"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Modules\\Converter\\Providers\\ConverterServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Modules\\Converter\\": "src/",
+                    "Modules\\Converter\\Tests\\": "tests/",
+                    "Modules\\Converter\\Database\\Factories\\": "database/factories/",
+                    "Modules\\Converter\\Database\\Seeders\\": "database/seeders/"
                 }
             },
             "license": [

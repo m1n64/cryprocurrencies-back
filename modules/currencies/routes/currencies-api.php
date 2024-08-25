@@ -6,4 +6,6 @@ Route::prefix('currencies')->group(function () {
     Route::get('/rate', [\Modules\Currencies\Http\Controllers\CurrencyController::class, 'all'])->name('currency.rate');
     Route::get('/{currency}/history', [\Modules\Currencies\Http\Controllers\CurrencyController::class, 'ratesHistory'])->name('currency.rates.history');
     Route::get('/', [\Modules\Currencies\Http\Controllers\CurrencyController::class, 'currencies'])->name('currency.all');
+
+    Route::get('/fiat', [\Modules\Currencies\Http\Controllers\CurrencyController::class, 'fiat'])->name('currency.fiat');
 });

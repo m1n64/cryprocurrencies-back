@@ -8,8 +8,10 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Modules\Currencies\Http\Resources\CurrencyResource;
 use Modules\Currencies\Http\Resources\CurrencyWithRateResource;
+use Modules\Currencies\Http\Resources\FiatCurrencyResource;
 use Modules\Currencies\Http\Resources\RatesHistoryResource;
 use Modules\Currencies\Models\Currency;
+use Modules\Currencies\Models\Fiat;
 
 class CurrencyController extends Controller
 {
@@ -24,7 +26,11 @@ class CurrencyController extends Controller
 
         $q = $request->get('q', null);
 
-        $currencies = Currency::query();
+        $currencies = Currency::query()
+            ->with(['rates' => function ($query) {
+                $query->latest()->limit(1);
+            }]);
+
         if ($q) {
             $query = \Str::ucfirst($q);
 
@@ -53,5 +59,10 @@ class CurrencyController extends Controller
     public function currencies(Request $request)
     {
         return CurrencyResource::collection(Currency::all());
+    }
+
+    public function fiat(Request $request)
+    {
+        return FiatCurrencyResource::collection(Fiat::all());
     }
 }

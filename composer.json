@@ -19,6 +19,7 @@
         "laravel/telescope": "^5.1",
         "laravel/tinker": "^2.9",
         "modules/coincap": "*",
+        "modules/converter": "*",
         "modules/currencies": "*",
         "predis/predis": "^2.0",
         "spiral/roadrunner-cli": "^2.6.0",

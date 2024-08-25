@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Facade;
 /**
  * @see \Modules\Coincap\Services\CoincapService
  * @method static array assets()
+ * @method static array rates()
  */
 class Coincap extends Facade
 {

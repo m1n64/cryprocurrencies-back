@@ -13,7 +13,7 @@ class CurrencyWithRateResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $latestRate = $this->rates()->latest()->first();
+        $latestRate = $this->rates->first();
 
         return [
             'id' => $this->id,

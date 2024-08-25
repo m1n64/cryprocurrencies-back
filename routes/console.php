@@ -9,3 +9,6 @@ Artisan::command('inspire', function () {
 
 Schedule::command('save:crypto-currency')
     ->everyMinute();
+
+Schedule::command('save:fiat-currency')
+    ->everyTwoHours();

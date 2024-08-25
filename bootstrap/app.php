@@ -18,6 +18,7 @@ return Application::configure(basePath: dirname(__DIR__))
     })
     ->withCommands([
         \Modules\Currencies\Console\Commands\SaveCryptoCurrencyCommand::class,
+        \Modules\Currencies\Console\Commands\SaveFiatCurrencyCommand::class,
     ])
     ->withExceptions(function (Exceptions $exceptions) {
         //
